@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header>
         <h1>Jonathan Alavez</h1>
-        <p>Software Developer | AI Enthusiast | Veteran</p>
+        <p>Software Developer | AI Enthusiast | Veteran | Student</p>
         <nav>
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
