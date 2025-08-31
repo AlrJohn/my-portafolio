@@ -137,7 +137,7 @@ function Contact() {
 
           {/* Optional direct email fallback */}
           <a
-            href={`mailto:you@example.com?subject=Portfolio%20Inquiry&body=${encodeURIComponent(form.message)}`}
+            href={`mailto:joni17111@outlook.com?subject=Portfolio%20Inquiry&body=${encodeURIComponent(form.message)}`}
             className="text-sm underline"
           >
             or email me directly
