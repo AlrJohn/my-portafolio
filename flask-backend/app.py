@@ -20,7 +20,15 @@ If the answer is unknown or not in context, say you don't know rather than guess
 # ----- App -----
 app = Flask(__name__)
 # During dev, allow your Vite origins. You can tighten later.
-CORS(app, resources={r"/ask": {"origins": ["http://127.0.0.1:5173", "http://localhost:5173"]}})
+
+CORS(app, resources={
+  r"/ask": {"origins": ["https://my-portafolio-inky.vercel.app", "http://localhost:5173"]},
+  r"/contact": {"origins": ["https://my-portafolio-inky.vercel.app", "http://localhost:5173"]},
+})
+
+from flask_cors import CORS
+
+
 
 # ----- Load data + build vector index -----
 print("Loading portfolio data from:", DATA_PATH)
@@ -142,4 +150,4 @@ def ask():
         return jsonify({"response": "Server error. Check backend logs."}), 500
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
