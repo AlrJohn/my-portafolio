@@ -120,7 +120,7 @@ function Contact() {
             className={`w-full p-3 rounded-xl border bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 resize-y
               ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 dark:border-gray-700 focus:ring-blue-500'}
             `}
-            placeholder="Tell me a bit about what you’re looking for…"
+            placeholder="Tell me a bit about what you're looking for…"
           />
           {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
         </div>
@@ -137,7 +137,7 @@ function Contact() {
 
           {/* Optional direct email fallback */}
           <a
-            href={`mailto:you@example.com?subject=Portfolio%20Inquiry&body=${encodeURIComponent(form.message)}`}
+            href={`mailto:joni17111@outlook.com?subject=Portfolio%20Inquiry&body=${encodeURIComponent(form.message)}`}
             className="text-sm underline"
           >
             or email me directly
