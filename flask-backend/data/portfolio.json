@@ -1,0 +1,73 @@
+[
+  { "section": "About", "text": "Jonathan Alavez Reyes is a CS student focused on AI/ML and full-stack development." },
+  { "section": "Project", "text": "Personal AI Chatbot: An on-site assistant answering questions about Jonathan and his work." },
+  { "section": "Project", "text": "LLM Knowledge Assistant: Summarizes and clusters large support transcript datasets for faster ops." },
+  { "section": "Experience", "text": "AI Engineering Intern at JLG Industries (2025): built LLM interface for 200k+ transcripts." },
+  { "section": "About", "text": "Jonathan Eveth Alavez Reyes is a Computer Science student at Penn State Abington." },
+  { "section": "About", "text": "He focuses on AI/ML and full-stack development with React and Flask." },
+  { "section": "About", "text": "He is fluent in Spanish and English, spoken and written." },
+
+  { "section": "Education", "text": "The Pennsylvania State University, Abington — B.S. in Computer Science in progress." },
+  { "section": "Education", "text": "Expected graduation: May 2027." },
+  { "section": "Education", "text": "GPA: 4.0; Schreyer Honors College Scholar; President Walker Award." },
+
+  { "section": "Experience", "text": "U.S. PA Army National Guard — Sergeant (E-5), King of Prussia, PA." },
+  { "section": "Experience", "text": "Army National Guard tenure: January 2022 to Present." },
+  { "section": "Experience", "text": "1st Squad Leader responsible for 13 soldiers." },
+  { "section": "Experience", "text": "Developed time management during 7 months of training." },
+  { "section": "Experience", "text": "Built discipline, accountability, and leadership under pressure." },
+
+  { "section": "Experience", "text": "PSU Abington Global Programs — Peer Mentor, April 2024 to Present." },
+  { "section": "Experience", "text": "Helped run International Student Welcome for 150+ incoming students." },
+  { "section": "Experience", "text": "Collaborated with a team of 11 peer mentors for 3 weeks." },
+  { "section": "Experience", "text": "Mentored 8 students in ENGL83S and developed strong relationships with supervisors and mentors." },
+
+  { "section": "Experience", "text": "Career & Professional Development — Peer Career Advisor, April 2024 to Present." },
+  { "section": "Experience", "text": "Worked in an office supervised by 6 Career Advisors; promoted student use of career resources." },
+  { "section": "Experience", "text": "Supported 3 major CPD events and conducted 2 classroom visits." },
+
+  { "section": "Research", "text": "ACURA Robotics Research Project — October 2023 to October 2024." },
+  { "section": "Research", "text": "Built a ROS robot with two cameras, a LiDAR, and a Raspberry Pi." },
+  { "section": "Research", "text": "Developed autonomous navigation and obstacle avoidance." },
+  { "section": "Research", "text": "Applied ML for object detection on robot camera footage." },
+
+  { "section": "Research", "text": "ACURA AI & Self-Efficacy — October 2024 to Present." },
+  { "section": "Research", "text": "Constructed a 25-item survey to study relationships between AI and self-efficacy." },
+  { "section": "Research", "text": "Used statistical methods including Pearson correlation, ANCOVA, regression, and chi-square." },
+  { "section": "Research", "text": "Completed CITI training for human subjects research." },
+
+  { "section": "Projects", "text": "Recipe Finder (May 2024 – July 2024): Flask web app to browse thousands of recipes by user-provided ingredients." },
+  { "section": "Projects", "text": "Recipe Finder: Added interactivity with JavaScript and styled with HTML/CSS." },
+
+  { "section": "Projects", "text": "Easy Finance (December 2024 – Present): React web app for user accounts, transactions, and budgeting." },
+  { "section": "Projects", "text": "Easy Finance: Flask API backend with planned ML to analyze spending patterns and forecasts." },
+  { "section": "Projects", "text": "Easy Finance GitHub: https://github.com/AlrJohn/easyFinance" },
+
+  { "section": "Leadership", "text": "Student Government Association — Director of Educational Equity, August 2024 to Present." },
+  { "section": "Leadership", "text": "Led a team of five senators to develop legislation and worked with six directors on campus change." },
+  { "section": "Leadership", "text": "Experienced with Robert's Rules of Order in formal procedures." },
+
+  { "section": "Leadership", "text": "Abington Academic Integrity Committee — Student Representative, August 2024 to Present." },
+  { "section": "Leadership", "text": "Worked with a 13-member committee on academic integrity claims and processes." },
+
+  { "section": "Leadership", "text": "Latine Student Organization — Event Coordinator, October 2023 to Present." },
+  { "section": "Leadership", "text": "Coordinated 15+ cultural events averaging 75 attendees." },
+
+  { "section": "Leadership", "text": "Abington Computer Science Society — Vice-President, August 2024 to Present." },
+  { "section": "Leadership", "text": "Managed seven club members and co-planned three CS events in Fall 2024." },
+  { "section": "Leadership", "text": "Networked with 100+ CS faculty and students." },
+
+  { "section": "Skills", "text": "Programming: Python, Java, Kotlin, JavaScript, HTML, CSS." },
+  { "section": "Skills", "text": "Web and App: React, Flask, Android app development." },
+  { "section": "Skills", "text": "Data & Tools: Excel (intermediate), PyTorch, SQL, Adobe Illustrator, Adobe Photoshop." },
+  { "section": "Skills", "text": "Interests: AI-human interaction research, web and Android development, graphic design, retail, math, reading." },
+
+  { "section": "Contact", "text": "Email: joni17111@outlook.com" },
+  { "section": "Contact", "text": "Phone: (484) 682-2798" },
+  { "section": "Contact", "text": "LinkedIn: linkedin.com/in/jonathan-alavez" },
+  { "section": "Contact", "text": "Location: Norristown, PA 19401" }
+
+
+
+]
+
