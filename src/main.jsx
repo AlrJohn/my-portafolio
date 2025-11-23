@@ -9,6 +9,7 @@ import Experience from './pages/Experience.jsx';
 import Contact from './pages/Contact.jsx';
 import Coursework from './pages/Coursework.jsx';
 import NotFound from './pages/NotFound.jsx';
+import CppDemo from './pages/CppDemo.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: 'experience', element: <Experience /> },
       { path: 'coursework', element: <Coursework /> },
       { path: 'contact', element: <Contact /> },
+      { path: 'cpp-demo', element: <CppDemo /> }
     ],
   },
 ]);

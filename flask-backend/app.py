@@ -149,5 +149,5 @@ def ask():
         print("🔥 Unexpected error:", repr(e))
         return jsonify({"response": "Server error. Check backend logs."}), 500
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
