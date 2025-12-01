@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+        .experience-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .exp-title {
+            flex: 1;
+        }
+        .role {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .org {
+            font-size: 1.125rem;
+            color: #6b7280;
+        }
+        .current-badge {
+            background-color: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .exp-meta {
+            margin-bottom: 1rem;
+        }
+        .meta-line {
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .meta-line strong {
+            font-weight: 600;
+        }
+        .bullets {
+            margin-bottom: 1rem;
+        }
+        .bullets h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .bullets ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            color: #374151;
+        }
+        .bullets li {
+            margin-bottom: 0.25rem;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tag {
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Experience Data</h1>
+        <div id="experience-list">
+            <!-- Experience items will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Experience data - hardcoded for static rendering
+        const experience = [
+  {
+    "id": "jlg-2025",
+    "role": "AI Engineering Intern",
+    "org": "JLG Industries",
+    "location": "Remote / Hybrid",
+    "start": "2025-06",
+    "end": null,
+    "current": true,
+    "bullets": [
+      "Built an LLM interface over 200k+ support transcripts to accelerate knowledge writing.",
+      "Implemented semantic search using embeddings and clustering."
+    ],
+    "tags": ["Internship", "AI", "LLMs", "Semantic Search"]
+  },
+  {
+    "id": "sga-2025",
+    "role": "Vice-President",
+    "org": "Student Government Association",
+    "location": "Abington, PA",
+    "start": "2025-05",
+    "end": null,
+    "current": true,
+    "bullets": [
+      "Managed 6 directors and aided in their committees' tasks.",
+      "Led senate meetings for 45+ senate members",
+      "Mastered Robert's rules for communicating during senate meetings"
+    ],
+    "tags": ["Leadership", "Community", "Campus Impact"]
+  },
+  {
+    "id": "research-assistant-2024",
+    "role": "Research Assistant",
+    "org": "Penn State Abington",
+    "location": "Abington, PA",
+    "start": "2024-01",
+    "end": "2025-05",
+    "current": false,
+    "bullets": [
+      "Conducted research on visibility graphs for human order-picking paths.",
+      "Designed and prepared a human study to validate graph efficiency."
+    ],
+    "tags": ["Research", "Graphs", "Human-Centered AI"]
+  },
+  {
+    "id": "pa-ang-2022",
+    "role": "Sergeant (E-5), 1st Squad Leader",
+    "org": "Pennsylvania Army National Guard",
+    "location": "King of Prussia, PA",
+    "start": "2022-01",
+    "end": null,
+    "current": true,
+    "bullets": [
+      "Lead a 13-soldier squad; coordinate training and readiness.",
+      "Completed 7 months of training; strengthened discipline and accountability.",
+      "Built leadership, teamwork, and respect under pressure."
+    ],
+    "tags": ["Leadership", "Team Coordination", "Time Management"]
+  },
+  {
+    "id": "global-programs-2024",
+    "role": "Peer Mentor",
+    "org": "Penn State Abington • Global Programs",
+    "location": "Abington, PA",
+    "start": "2024-04",
+    "end": null,
+    "current": true,
+    "bullets": [
+      "Supported International Student Welcome for 150+ incoming students.",
+      "Collaborated with a team of 11 peer mentors over a 3-week program.",
+      "Mentored 8 students in ENGL 83S; built strong relationships with supervisors and peers."
+    ],
+    "tags": ["Mentorship", "Event Support", "Student Success"]
+  },
+  {
+    "id": "cpd-2024",
+    "role": "Peer Career Advisor",
+    "org": "Penn State Abington • Career & Professional Development",
+    "location": "Abington, PA",
+    "start": "2024-04",
+    "end": "2025-05",
+    "current": false,
+    "bullets": [
+      "Promoted student use of career resources; office support with 6 Career Advisors.",
+      "Helped organize and run 3 major CPD events; delivered 2 classroom visits.",
+      "Guided students on opportunities and campus career services."
+    ],
+    "tags": ["Career Services", "Public Speaking", "Event Operations"]
+  },
+  {
+    "id": "acura-robotics-2023",
+    "role": "Undergraduate Researcher — Robotics",
+    "org": "ACURA (Abington College Undergraduate Research Activities)",
+    "location": "Abington, PA",
+    "start": "2023-10",
+    "end": "2024-10",
+    "current": false,
+    "bullets": [
+      "Built a ROS robot with two cameras, a LiDAR, and a Raspberry Pi.",
+      "Implemented autonomous navigation and obstacle avoidance.",
+      "Applied ML for object detection on robot camera streams."
+    ],
+    "tags": ["ROS", "Computer Vision", "Embedded Systems", "Python"]
+  },
+  {
+    "id": "acura-ai-self-efficacy-2024",
+    "role": "Undergraduate Researcher — AI & Self-Efficacy",
+    "org": "ACURA (Abington College Undergraduate Research Activities)",
+    "location": "Abington, PA",
+    "start": "2024-10",
+    "end": "2025-05",
+    "current": false,
+    "bullets": [
+      "Designed a 25-item survey on AI use and self-efficacy.",
+      "Analyzed data with Pearson correlation, ANCOVA, regression, and chi-square.",
+      "Completed CITI training; ensured compliant human-subjects research."
+    ],
+    "tags": ["Research Methods", "Statistics", "Survey Design", "Ethics"]
+  },
+  {
+    "id": "sga-2024",
+    "role": "Director of Educational Equity",
+    "org": "Student Government Association (PSU Abington)",
+    "location": "Abington, PA",
+    "start": "2024-08",
+    "end": "2025-05",
+    "current": false,
+    "bullets": [
+      "Led a team of 5 senators to develop legislation.",
+      "Collaborated with 6 directors to drive campus-wide initiatives.",
+      "Practiced formal procedures using Robert's Rules of Order."
+    ],
+    "tags": ["Leadership", "Policy", "Campus Impact"]
+  },
+  {
+    "id": "integrity-committee-2024",
+    "role": "Student Representative",
+    "org": "Abington Academic Integrity Committee",
+    "location": "Abington, PA",
+    "start": "2024-08",
+    "end": null,
+    "current": true,
+    "bullets": [
+      "Worked with a 13-member committee on academic integrity claims.",
+      "Learned university processes for integrity violations.",
+      "Strengthened responsibility, duty, and fairness."
+    ],
+    "tags": ["Governance", "Ethics", "Committee Work"]
+  },
+  {
+    "id": "lso-2023",
+    "role": "Event Coordinator",
+    "org": "Latine Student Organization",
+    "location": "Abington, PA",
+    "start": "2023-10",
+    "end": "2025-05",
+    "current": false,
+    "bullets": [
+      "Coordinated 15+ cultural events averaging 75 attendees.",
+      "Planned logistics and execution to ensure smooth events.",
+      "Deepened cultural awareness and community engagement."
+    ],
+    "tags": ["Event Planning", "Community", "Culture"]
+  },
+  {
+    "id": "css-2024",
+    "role": "Vice-President",
+    "org": "Abington Computer Science Society",
+    "location": "Abington, PA",
+    "start": "2024-08",
+    "end": "2025-05",
+    "current": false,
+    "bullets": [
+      "Managed 7 club members; advanced leadership and coordination.",
+      "Co-planned 3 CS events in Fall 2024.",
+      "Networked with 100+ CS faculty and students."
+    ],
+    "tags": ["Leadership", "Community", "Programming"]
+  }
+        ];
+
+        // Render experience items
+        const container = document.getElementById('experience-list');
+        experience.forEach(exp => {
+            const item = document.createElement('div');
+            item.className = 'experience-item';
+            
+            let html = `
+                <div class="exp-header">
+                    <div class="exp-title">
+                        <div class="role">${exp.role}</div>
+                        <div class="org">${exp.org}</div>
+                    </div>
+                    ${exp.current ? '<div class="current-badge">Current</div>' : ''}
+                </div>
+                <div class="exp-meta">
+                    <div class="meta-line"><strong>Location:</strong> ${exp.location}</div>
+                    <div class="meta-line"><strong>Duration:</strong> ${exp.start} ${exp.end ? `to ${exp.end}` : '– Present'}</div>
+                </div>
+                <div class="bullets">
+                    <h3>Responsibilities:</h3>
+                    <ul>
+            `;
+            
+            exp.bullets.forEach(bullet => {
+                html += `<li>${bullet}</li>`;
+            });
+            
+            html += `
+                    </ul>
+                </div>
+                <div class="tags">
+            `;
+            
+            exp.tags.forEach(tag => {
+                html += `<span class="tag">${tag}</span>`;
+            });
+            
+            html += `</div>`;
+            
+            item.innerHTML = html;
+            container.appendChild(item);
+        });
+    </script>
+</body>
+</html>
