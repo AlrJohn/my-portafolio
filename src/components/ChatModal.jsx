@@ -20,7 +20,7 @@ export default function ChatModal({ open, onClose }) {
           >
             <div className="rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800">
               <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-800">
-                <h3 className="font-semibold">Ask Me Anything</h3>
+                <h3 className="font-semibold">Ask Me Anything About Jonathan</h3>
                 <button onClick={onClose} className="text-sm px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
                   Close
                 </button>

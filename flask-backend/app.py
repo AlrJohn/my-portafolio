@@ -22,8 +22,8 @@ app = Flask(__name__)
 # During dev, allow your Vite origins. You can tighten later.
 
 CORS(app, resources={
-  r"/ask": {"origins": ["https://my-portafolio-inky.vercel.app", "http://localhost:5173"]},
-  r"/contact": {"origins": ["https://my-portafolio-inky.vercel.app", "http://localhost:5173"]},
+  r"/ask": {"origins": ["https://jonathanalavez.vercel.app/", "http://localhost:5173", "model.arjnhomenet.xyz"]},
+  r"/contact": {"origins": ["https://jonathanalavez.vercel.app/", "http://localhost:5173", "model.arjnhomenet.xyz"]},
 })
 
 from flask_cors import CORS

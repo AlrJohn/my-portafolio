@@ -12,7 +12,7 @@ function Avatar({ src, alt, size = 40 }) {
 }
 
 export default function Chatbot() {
-  const { messages, setMessages, loading, setLoading } = useChat(); 
+  const { messages, setMessages, loading, setLoading, clearChat } = useChat(); 
   const [input, setInput] = useState('');
   const endRef = useRef(null);
 
@@ -71,20 +71,28 @@ export default function Chatbot() {
         <div ref={endRef} />
       </div>
 
-      <div className="flex">
+      <div className="flex gap-2">
         <input
-          className="flex-1 border border-gray-300 dark:border-gray-600 p-2 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          className="flex-1 border border-gray-300 dark:border-gray-600 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
           placeholder="Ask me something..."
         />
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r disabled:opacity-50"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50"
           onClick={sendMessage}
           disabled={loading}
         >
           {loading ? '...' : 'Send'}
+        </button>
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          onClick={clearChat}
+          disabled={loading}
+          title="Clear chat history"
+        >
+          Clear
         </button>
       </div>
     </div>
