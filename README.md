@@ -1,15 +1,81 @@
-# React + Vite
-EDIT 1
+# Jonathan Reyes - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-stack portfolio website featuring a Retrieval-Augmented Generation (RAG) chatbot powered by a local LLM
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend
+- **React 19** with **Vite** - Fast, modern UI development.
+- **Tailwind CSS 4** - Responsive, cleaner styling.
+- **Framer Motion** - Smooth animations and transitions.
+- **React Router 7** - Client-side routing.
 
-## Expanding the ESLint configuration
+### Backend (Chatbot API)
+- **Flask** - Lightweight Python server.
+- **Ollama** - Interface for running local LLMs (Llama 3).
+- **FAISS** - Vector database for fast similarity search.
+- **Sentence-Transformers** - `all-MiniLM-L6-v2` for generating embeddings.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
 
+- **Personal AI Chatbot**: An "Ask Me" feature that answers questions about my background, projects, and skills using RAG.
+- **Dynamic Projects Showcase**: Interactive cards displaying my recent work.
+- **Responsive Design**: Built for mobile, tablet, and desktop.
+- **Dark Mode**: Fully supported system-aware dark theme.
+- **Experience & Coursework**: Detailed timelines of my professional and academic history.
 
+## 🛠️ Setup & Installation
+
+### Prerequisites
+- Node.js (v18+)
+- Python (3.10+)
+- [Ollama](https://ollama.com/) (running locally)
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/AlrJohn/my-portafolio.git
+cd my-portafolio
+```
+
+### 2. Frontend Setup
+Install dependencies and run the dev server:
+```bash
+npm install
+npm run dev
+```
+
+### 3. Backend Setup (Optional for Chatbot)
+If you want to run the RAG chatbot:
+
+1. Navigate to the backend folder:
+   ```bash
+   cd flask-backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   # Windows:
+   venv\Scripts\activate
+   # Mac/Linux:
+   source venv/bin/activate
+   ```
+3. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Start the Flask server:
+   ```bash
+   python app.py
+   ```
+   *The server runs on `http://localhost:5000` by default.*
+
+### 4. Configure Ollama
+Ensure you have Ollama running and the model pulled:
+```bash
+ollama serve
+ollama pull llama3.1:8b
+```
+*You can configure the model and host in `flask-backend/app.py` or via environment variables.*
+
+## 📄 License
+This project is open source and available under the [MIT License](LICENSE).

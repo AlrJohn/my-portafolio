@@ -31,7 +31,7 @@ export default function App() {
               <NavLink to="/projects" className={linkClass}>Projects</NavLink>
               <NavLink to="/experience" className={linkClass}>Experience</NavLink>
               <NavLink to="/coursework" className={linkClass}>Coursework</NavLink>
-              <NavLink to="/cpp-demo" className={linkClass}>C++ Demo</NavLink>
+
               <NavLink to="/contact" className={linkClass}>Contact</NavLink>
               <button
                 onClick={() => setChatOpen(true)}
