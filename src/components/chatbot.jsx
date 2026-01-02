@@ -1,18 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import botAvatar from '../assets/bot-avatar.png';
-import userAvatar from '../assets/user-avatar.png';
-import { useChat } from '../context/ChatContext.jsx';  
+import profileImg from '../assets/profile.jpg';
+import { useChat } from '../context/ChatContext.jsx';
+import { Send, Sparkles, User, Trash2 } from 'lucide-react';
 
-function Avatar({ src, alt, size = 40 }) {
+function Avatar({ src, isBot }) {
   return (
-    <div style={{ width: size, height: size, flex: '0 0 auto', borderRadius: 9999, overflow: 'hidden' }}>
-      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+    <div className={`w-9 h-9 rounded-full overflow-hidden flex-shrink-0 border border-white/10 ${isBot ? 'shadow-lg shadow-blue-900/20' : 'bg-slate-700 flex items-center justify-center'}`}>
+      {src ? (
+        <img src={src} alt="Avatar" className="w-full h-full object-cover" />
+      ) : (
+        <User size={18} className="text-gray-400" />
+      )}
     </div>
   );
 }
 
 export default function Chatbot() {
-  const { messages, setMessages, loading, setLoading, clearChat } = useChat(); 
+  const { messages, setMessages, loading, setLoading, clearChat } = useChat();
   const [input, setInput] = useState('');
   const endRef = useRef(null);
 
@@ -45,55 +49,75 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="p-4 w-full max-w-xl bg-white dark:bg-gray-800">
-      <div className="h-[60vh] overflow-y-auto border p-4 mb-4 bg-gray-100 dark:bg-gray-900 rounded space-y-4">
+    <div className="flex flex-col h-[500px] w-full">
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto p-5 space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+        {messages.length === 0 && (
+          <div className="flex flex-col items-center justify-center h-full text-center opacity-50 space-y-3">
+            <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center">
+              <Sparkles className="text-blue-400" />
+            </div>
+            <p className="text-sm text-gray-400 max-w-xs">
+              Hi! I'm Jonathan's digital twin. Ask me about his projects, skills, or experience.
+            </p>
+          </div>
+        )}
+
         {messages.map((msg, i) => {
           const isUser = msg.role === 'user';
           if (!msg.text) return null;
           return (
-            <div key={i} className={`flex items-start gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}>
-              {!isUser && <Avatar src={botAvatar} alt="Bot" size={40} />}
-              <div className={`px-4 py-2 max-w-[75%] rounded-2xl text-sm leading-relaxed ${
-                isUser ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black dark:bg-gray-700 dark:text-white'
-              }`}>
+            <div key={i} className={`flex items-end gap-3 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+              <Avatar src={isUser ? null : profileImg} isBot={!isUser} />
+
+              <div className={`px-5 py-3.5 max-w-[80%] text-sm leading-relaxed shadow-sm ${isUser
+                  ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-2xl rounded-tr-sm'
+                  : 'bg-white/10 backdrop-blur-md text-gray-100 border border-white/5 rounded-2xl rounded-tl-sm'
+                }`}>
                 {msg.text}
               </div>
-              {isUser && <Avatar src={userAvatar} alt="You" size={40} />}
             </div>
           );
         })}
+
         {loading && (
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <Avatar src={botAvatar} alt="Bot" size={24} />
-            <span className="animate-pulse">Typing…</span>
+          <div className="flex items-end gap-3">
+            <Avatar src={profileImg} isBot={true} />
+            <div className="bg-white/5 backdrop-blur-md border border-white/5 px-4 py-3 rounded-2xl rounded-tl-sm flex gap-1">
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            </div>
           </div>
         )}
         <div ref={endRef} />
       </div>
 
-      <div className="flex gap-2">
-        <input
-          className="flex-1 border border-gray-300 dark:border-gray-600 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-          placeholder="Ask me something..."
-        />
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50"
-          onClick={sendMessage}
-          disabled={loading}
-        >
-          {loading ? '...' : 'Send'}
-        </button>
-        <button
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded disabled:opacity-50"
-          onClick={clearChat}
-          disabled={loading}
-          title="Clear chat history"
-        >
-          Clear
-        </button>
+      {/* Input Area */}
+      <div className="p-4 pt-2">
+        <div className="relative flex items-center gap-2">
+          <input
+            className="w-full bg-black/20 border border-white/10 rounded-full pl-5 pr-12 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 placeholder:text-gray-500 transition-all font-light"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+            placeholder="Type your question..."
+          />
+
+          <button
+            className="absolute right-2 p-2 bg-blue-600/90 hover:bg-blue-600 text-white rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20"
+            onClick={sendMessage}
+            disabled={loading || !input.trim()}
+          >
+            <Send size={16} />
+          </button>
+        </div>
+
+        {messages.length > 0 && (
+          <button onClick={clearChat} className="mx-auto mt-3 text-xs text-gray-500 hover:text-red-400 flex items-center gap-1 transition">
+            <Trash2 size={10} /> Clear conversation
+          </button>
+        )}
       </div>
     </div>
   );

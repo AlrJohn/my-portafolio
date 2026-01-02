@@ -14,15 +14,19 @@ export default function App() {
   }, []);
 
   const linkClass = ({ isActive }) =>
-    `px-3 py-2 rounded-xl transition ${
-      isActive ? 'bg-gray-200 dark:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+    `px-3 py-2 rounded-xl transition ${isActive ? 'bg-gray-200 dark:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
     }`;
 
   return (
     <ChatProvider> {/* <-- wrap everything */}
       <ScrollToTop />
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col">
-        <header className="border-b border-gray-200 dark:border-gray-800 sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur">
+        <header className={`fixed top-0 w-full z-40 transition-colors duration-300 ${
+          // If we are at the top (OR forced transparent), be transparent. Else, white/blur.
+          // But actually, for this specific design, we might want it transparent on Home but solid elsewhere.
+          // For now, let's keep the existing logic but make it fixed so it overlays content.
+          'bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800'
+          }`}>
           <div className="page h-14 flex items-center justify-between">
             <Link to="/" className="font-semibold tracking-tight">Jonathan Reyes</Link>
             <nav className="hidden md:flex items-center gap-1 text-sm">
@@ -58,6 +62,6 @@ export default function App() {
         <ChatModal open={chatOpen} onClose={() => setChatOpen(false)} />
       </div>
     </ChatProvider>
-    
+
   );
 }

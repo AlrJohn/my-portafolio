@@ -1,122 +1,146 @@
 // src/pages/Home.jsx
 import { motion } from 'framer-motion';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import { ArrowRight, MessageCircle, Code, Server, Database, Brain } from 'lucide-react';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import { projects } from '../data/projects.js';
 import ProjectCard from '../components/ProjectCard.jsx';
+import HeroParallax from '../components/HeroParallax.jsx';
 
 /** Animation helpers */
 const fadeInUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: 'easeOut', delay },
-  viewport: { once: true, amount: 0.3 },
+  viewport: { once: true },
 });
-
-const gridItem = {
-  initial: { opacity: 0, y: 16 },
-  whileInView: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-  viewport: { once: true, amount: 0.2 },
-};
 
 export default function Home() {
   const navigate = useNavigate();
-  const { openChat } = useOutletContext(); // <-- from App.jsx
+  const { openChat } = useOutletContext();
 
   return (
-    <div className="space-y-20 md:space-y-28">
+    <div className="-mt-20">
+      {/* Negative margin to pull hero up behind the transparent navbar if we had one. 
+        For now, we just want full background coverage. */}
+
       {/* ---------- HERO ---------- */}
-      <section className="relative isolate overflow-hidden rounded-3xl bg-gradient-to-b from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 py-16 md:py-24">
-        {/* soft background glows */}
-        <div aria-hidden className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-30 bg-blue-300 dark:bg-blue-600" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-32 -right-20 h-96 w-96 rounded-full blur-3xl opacity-25 bg-purple-300 dark:bg-purple-600" />
+      <section className="relative w-full min-h-[95vh] bg-slate-950 text-white overflow-hidden rounded-b-[3rem] md:rounded-b-[5rem] flex flex-col pt-24">
 
-        <div className="page">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-14">
-            {/* LEFT */}
+        {/* Background Gradients */}
+        <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-blue-900/20 to-transparent pointer-events-none" />
+        <div className="absolute -left-40 top-40 w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute -right-40 bottom-40 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center flex-1 pb-16">
+
+          {/* LEFT: typography */}
+          <div className="z-10 order-2 lg:order-1 flex flex-col gap-6">
             <motion.div {...fadeInUp(0)}>
-              <span className="inline-block text-xs px-2 py-1 rounded-full bg-blue-600/10 text-blue-700 dark:text-blue-300 border border-blue-600/20 mb-4">
-                AI / ML • LLM Apps • Full-stack
-              </span>
-
-              <motion.h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight" {...fadeInUp(0.05)}>
-                Jonathan <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">Reyes</span>
-              </motion.h1>
-
-              <motion.p className="mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl" {...fadeInUp(0.1)}>
-                CS student building practical AI experiences: LLM interfaces, NLP tools, and
-                full-stack apps with React + Flask. Ask my site anything—there’s a chatbot for that.
-              </motion.p>
-
-              <motion.div className="mt-6 flex flex-wrap gap-3" {...fadeInUp(0.15)}>
-                <button
-                  onClick={() => navigate('/projects')}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 inline-flex items-center gap-2"
-                >
-                  View My Work <ArrowRight size={18} />
-                </button>
-                <Link
-                  to="/contact"
-                  className="px-5 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
-                >
-                  Contact
-                </Link>
-                <button
-                  onClick={openChat}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 inline-flex items-center gap-2"
-                >
-                  Ask Me <MessageCircle size={18} />
-                </button>
-              </motion.div>
-            </motion.div>
-
-            {/* RIGHT highlight card */}
-            <motion.div {...fadeInUp(0.1)}>
-              <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow-xl p-5">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-3">Featured</div>
-                <div className="rounded-xl border border-gray-200 dark:border-gray-800 p-4 bg-white dark:bg-gray-800">
-                  <div className="text-sm text-gray-500 dark:text-gray-400">Project</div>
-                  <div className="font-semibold">Personal AI Chatbot</div>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                    On-site assistant that answers questions about my background and projects.
-                  </p>
-                  <div className="mt-3 flex gap-2">
-                    {['React', 'Flask', 'OpenAI'].map(t => (
-                      <span key={t} className="text-xs px-2 py-1 rounded bg-blue-600/10 text-blue-700 dark:text-blue-300">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-sm text-blue-200">
+                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                Available for work
               </div>
             </motion.div>
+
+            <motion.h1
+              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]"
+              {...fadeInUp(0.1)}
+            >
+              Full Stack <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+                Developer
+              </span>
+            </motion.h1>
+
+            <motion.p className="text-lg md:text-xl text-gray-400 max-w-md leading-relaxed" {...fadeInUp(0.2)}>
+              Building intelligent web applications with modern tech stacks.
+              Currently exploring LLMs and Agentic Workflows.
+            </motion.p>
+
+            <motion.div className="flex flex-wrap gap-4 mt-2" {...fadeInUp(0.3)}>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm text-gray-500 uppercase tracking-widest font-semibold">01</span>
+                <span className="text-base text-gray-200">Frontend Architecture</span>
+              </div>
+              <div className="w-px h-12 bg-white/10 hidden md:block" />
+              <div className="flex flex-col gap-1">
+                <span className="text-sm text-gray-500 uppercase tracking-widest font-semibold">02</span>
+                <span className="text-base text-gray-200">Backend Systems</span>
+              </div>
+              <div className="w-px h-12 bg-white/10 hidden md:block" />
+              <div className="flex flex-col gap-1">
+                <span className="text-sm text-gray-500 uppercase tracking-widest font-semibold">03</span>
+                <span className="text-base text-gray-200">AI Integration</span>
+              </div>
+            </motion.div>
+
+            <motion.div className="flex flex-wrap gap-3 mt-8" {...fadeInUp(0.4)}>
+              <button
+                onClick={openChat}
+                className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-100 transition flex items-center gap-2 group"
+              >
+                Let's Talk <ArrowRight className="group-hover:translate-x-1 transition" size={18} />
+              </button>
+              <button
+                onClick={() => navigate('/projects')}
+                className="px-8 py-4 rounded-full border border-white/20 hover:bg-white/10 transition text-white"
+              >
+                View Projects
+              </button>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: 3D Image */}
+          <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+            <HeroParallax />
+          </div>
+
+        </div>
+      </section>
+
+      {/* ---------- SERVICE PILLARS (Brand Strip) ---------- */}
+      <section className="py-20 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-between items-center gap-8 text-gray-400 dark:text-gray-500 grayscale opacity-70 hover:opacity-100 transition duration-500">
+            <div className="flex items-center gap-2 text-xl font-semibold"><Code /> React & Next.js</div>
+            <div className="flex items-center gap-2 text-xl font-semibold"><Server /> Python Flask</div>
+            <div className="flex items-center gap-2 text-xl font-semibold"><Database /> PostgreSQL</div>
+            <div className="flex items-center gap-2 text-xl font-semibold"><Brain /> Neural Networks</div>
           </div>
         </div>
       </section>
 
-      {/* ---------- FEATURED PROJECTS (map + animate) ---------- */}
-      <section className="page">
-        <motion.h2 className="text-2xl md:text-3xl font-bold mb-2" {...fadeInUp(0)}>
-          Featured Projects
-        </motion.h2>
-        <motion.p className="text-gray-600 dark:text-gray-400 mb-6" {...fadeInUp(0.05)}>
-          A few things I’m proud of
-        </motion.p>
+      {/* ---------- FEATURED PROJECTS ---------- */}
+      <section className="page py-20">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-4xl font-bold mb-4 dark:text-white">Selected Works</h2>
+            <div className="h-1 w-20 bg-blue-600 rounded-full" />
+          </div>
+          <Link to="/projects" className="hidden md:flex items-center gap-2 text-blue-600 font-medium hover:underline">
+            View all <ArrowRight size={16} />
+          </Link>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((p, i) => (
-            <motion.div key={p.title} {...gridItem} transition={{ delay: 0.06 * i }}>
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+            >
               <ProjectCard p={p} />
             </motion.div>
           ))}
         </div>
 
-        <motion.div className="mt-6" {...fadeInUp(0.1)}>
-          <Link to="/projects" className="inline-flex items-center gap-2 underline">
-            See all projects <ArrowRight size={16} />
-          </Link>
-        </motion.div>
+        <div className="mt-8 md:hidden text-center">
+          <Link to="/projects" className="text-blue-600 font-medium hover:underline">View all projects</Link>
+        </div>
       </section>
     </div>
   );
 }
+
