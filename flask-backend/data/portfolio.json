@@ -9,7 +9,7 @@
 
   { "section": "Education", "text": "The Pennsylvania State University, Abington — B.S. in Computer Science in progress." },
   { "section": "Education", "text": "Expected graduation: May 2027." },
-  { "section": "Education", "text": "GPA: 4.0; Schreyer Honors College Scholar; President Walker Award." },
+  { "section": "Education", "text": "GPA: 4.0; Schreyer Honors College Scholar; HSF Scholar; President Walker Award; The President Sparks Award; The Exemplary Leader Award; The Ayoub Mathematics Achievement Award; The Abington College Science & Engineering Outstanding Scholarship Award" },
 
   { "section": "Experience", "text": "U.S. PA Army National Guard — Sergeant (E-5), King of Prussia, PA." },
   { "section": "Experience", "text": "Army National Guard tenure: January 2022 to Present." },
@@ -43,8 +43,14 @@
   { "section": "Projects", "text": "Easy Finance: Flask API backend with planned ML to analyze spending patterns and forecasts." },
   { "section": "Projects", "text": "Easy Finance GitHub: https://github.com/AlrJohn/easyFinance" },
 
-  { "section": "Leadership", "text": "Student Government Association — Director of Educational Equity, August 2024 to Present." },
+  { "section": "Leadership", "text": "Student Government Association — Director of Educational Equity, August 2024 to May 2025." },
   { "section": "Leadership", "text": "Led a team of five senators to develop legislation and worked with six directors on campus change." },
+  { "section": "Leadership", "text": "Experienced with Robert's Rules of Order in formal procedures." },
+
+  { "section": "Leadership", "text": "Student Government Association — Vice President, May 2025 to Present." },
+  { "section": "Leadership", "text": "Collaborated with a team of 3 executive members to oversee the SGA organization" },
+  { "section": "Leadership", "text": "Helped oversee a team of 6 directors, and 45+ senators in the SGA organization" },
+  { "section": "Leadership", "text": "Organized and carried out 5+ SGA tailored events to promote enagagement on campus" },
   { "section": "Leadership", "text": "Experienced with Robert's Rules of Order in formal procedures." },
 
   { "section": "Leadership", "text": "Abington Academic Integrity Committee — Student Representative, August 2024 to Present." },
@@ -65,7 +71,7 @@
   { "section": "Contact", "text": "Email: joni17111@outlook.com" },
   { "section": "Contact", "text": "Phone: (484) 682-2798" },
   { "section": "Contact", "text": "LinkedIn: linkedin.com/in/jonathan-alavez" },
-  { "section": "Contact", "text": "Location: Norristown, PA 19401" }
+  { "section": "Contact", "text": "Location: Philadelphia, PA 19116" }
 
 
 
