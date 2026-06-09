@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { sortExperiences } from "../data/experience.js";
 
 export default function ExperienceTimeline() {
@@ -11,7 +11,7 @@ export default function ExperienceTimeline() {
 
       <ul className="space-y-6">
         {items.map((item, i) => (
-          <motion.li
+          <Motion.li
             key={item.id}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export default function ExperienceTimeline() {
                 </div>
               )}
             </article>
-          </motion.li>
+          </Motion.li>
         ))}
       </ul>
     </div>

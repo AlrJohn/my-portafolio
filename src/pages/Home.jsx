@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
-import { motion } from 'framer-motion';
-import { ArrowRight, MessageCircle, Code, Server, Database, Brain } from 'lucide-react';
+import { motion as Motion } from 'framer-motion';
+import { ArrowRight, Code, Server, Database, Brain } from 'lucide-react';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import { projects } from '../data/projects.js';
 import ProjectCard from '../components/ProjectCard.jsx';
@@ -19,12 +19,8 @@ export default function Home() {
   const { openChat } = useOutletContext();
 
   return (
-    <div className="-mt-20">
-      {/* Negative margin to pull hero up behind the transparent navbar if we had one. 
-        For now, we just want full background coverage. */}
-
-      {/* ---------- HERO ---------- */}
-      <section className="relative w-full min-h-[95vh] bg-slate-950 text-white overflow-hidden rounded-b-[3rem] md:rounded-b-[5rem] flex flex-col pt-24">
+    <div>
+      <section className="relative w-full min-h-[calc(100vh-4rem)] bg-slate-950 text-white overflow-hidden rounded-b-[3rem] md:rounded-b-[5rem] flex flex-col">
 
         {/* Background Gradients */}
         <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-blue-900/20 to-transparent pointer-events-none" />
@@ -35,14 +31,14 @@ export default function Home() {
 
           {/* LEFT: typography */}
           <div className="z-10 order-2 lg:order-1 flex flex-col gap-6">
-            <motion.div {...fadeInUp(0)}>
+            <Motion.div {...fadeInUp(0)}>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-sm text-blue-200">
                 <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                Available for work
+                Building AI-enabled products
               </div>
-            </motion.div>
+            </Motion.div>
 
-            <motion.h1
+            <Motion.h1
               className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]"
               {...fadeInUp(0.1)}
             >
@@ -50,14 +46,14 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
                 Developer
               </span>
-            </motion.h1>
+            </Motion.h1>
 
-            <motion.p className="text-lg md:text-xl text-gray-400 max-w-md leading-relaxed" {...fadeInUp(0.2)}>
-              Building intelligent web applications with modern tech stacks.
-              Currently exploring LLMs and Agentic Workflows.
-            </motion.p>
+            <Motion.p className="text-lg md:text-xl text-gray-400 max-w-md leading-relaxed" {...fadeInUp(0.2)}>
+              Building intelligent web applications with modern technology.
+              Currently focused on LLMs and agentic workflows.
+            </Motion.p>
 
-            <motion.div className="flex flex-wrap gap-4 mt-2" {...fadeInUp(0.3)}>
+            <Motion.div className="flex flex-wrap gap-4 mt-2" {...fadeInUp(0.3)}>
               <div className="flex flex-col gap-1">
                 <span className="text-sm text-gray-500 uppercase tracking-widest font-semibold">01</span>
                 <span className="text-base text-gray-200">Frontend Architecture</span>
@@ -72,9 +68,9 @@ export default function Home() {
                 <span className="text-sm text-gray-500 uppercase tracking-widest font-semibold">03</span>
                 <span className="text-base text-gray-200">AI Integration</span>
               </div>
-            </motion.div>
+            </Motion.div>
 
-            <motion.div className="flex flex-wrap gap-3 mt-8" {...fadeInUp(0.4)}>
+            <Motion.div className="flex flex-wrap gap-3 mt-8" {...fadeInUp(0.4)}>
               <button
                 onClick={openChat}
                 className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-100 transition flex items-center gap-2 group"
@@ -87,7 +83,7 @@ export default function Home() {
               >
                 View Projects
               </button>
-            </motion.div>
+            </Motion.div>
           </div>
 
           {/* RIGHT: 3D Image */}
@@ -98,19 +94,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- SERVICE PILLARS (Brand Strip) ---------- */}
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-between items-center gap-8 text-gray-400 dark:text-gray-500 grayscale opacity-70 hover:opacity-100 transition duration-500">
             <div className="flex items-center gap-2 text-xl font-semibold"><Code /> React & Next.js</div>
-            <div className="flex items-center gap-2 text-xl font-semibold"><Server /> Python Flask</div>
+            <div className="flex items-center gap-2 text-xl font-semibold"><Server /> Python APIs</div>
             <div className="flex items-center gap-2 text-xl font-semibold"><Database /> PostgreSQL</div>
             <div className="flex items-center gap-2 text-xl font-semibold"><Brain /> Neural Networks</div>
           </div>
         </div>
       </section>
 
-      {/* ---------- FEATURED PROJECTS ---------- */}
       <section className="page py-20">
         <div className="flex items-end justify-between mb-12">
           <div>
@@ -124,7 +118,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((p, i) => (
-            <motion.div
+            <Motion.div
               key={p.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +126,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <ProjectCard p={p} />
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
 

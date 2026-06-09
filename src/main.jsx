@@ -12,6 +12,10 @@ import NotFound from './pages/NotFound.jsx';
 
 import './index.css';
 
+const savedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+document.documentElement.classList.toggle('dark', savedTheme === 'dark' || (!savedTheme && prefersDark));
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -24,7 +28,7 @@ const router = createBrowserRouter([
       { path: 'experience', element: <Experience /> },
       { path: 'coursework', element: <Coursework /> },
       { path: 'contact', element: <Contact /> },
-
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);

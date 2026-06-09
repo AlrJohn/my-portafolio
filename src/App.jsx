@@ -1,67 +1,27 @@
-import { Outlet, Link, NavLink } from 'react-router-dom';
-import FloatingChatButton from './components/FloatingChatButton.jsx';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import ChatModal from './components/ChatModal.jsx';
-import { useEffect, useState } from 'react';
-import { ChatProvider } from './context/ChatContext.jsx';  // <-- add
+import FloatingChatButton from './components/FloatingChatButton.jsx';
+import Footer from './components/Footer.jsx';
+import NavBar from './components/NavBar.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
+import { ChatProvider } from './context/ChatContext.jsx';
 
 export default function App() {
   const [chatOpen, setChatOpen] = useState(false);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') document.documentElement.classList.add('dark');
-  }, []);
-
-  const linkClass = ({ isActive }) =>
-    `px-3 py-2 rounded-xl transition ${isActive ? 'bg-gray-200 dark:bg-gray-700' : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-    }`;
-
   return (
-    <ChatProvider> {/* <-- wrap everything */}
+    <ChatProvider>
       <ScrollToTop />
-      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col">
-        <header className={`fixed top-0 w-full z-40 transition-colors duration-300 ${
-          // If we are at the top (OR forced transparent), be transparent. Else, white/blur.
-          // But actually, for this specific design, we might want it transparent on Home but solid elsewhere.
-          // For now, let's keep the existing logic but make it fixed so it overlays content.
-          'bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800'
-          }`}>
-          <div className="page h-14 flex items-center justify-between">
-            <Link to="/" className="font-semibold tracking-tight">Jonathan Reyes</Link>
-            <nav className="hidden md:flex items-center gap-1 text-sm">
-              <NavLink to="/" className={linkClass} end>Home</NavLink>
-              <NavLink to="/about" className={linkClass}>About</NavLink>
-              <NavLink to="/projects" className={linkClass}>Projects</NavLink>
-              <NavLink to="/experience" className={linkClass}>Experience</NavLink>
-              <NavLink to="/coursework" className={linkClass}>Coursework</NavLink>
-
-              <NavLink to="/contact" className={linkClass}>Contact</NavLink>
-              <button
-                onClick={() => setChatOpen(true)}
-                className="ml-2 px-3 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
-              >
-                Ask Me
-              </button>
-            </nav>
-          </div>
-        </header>
-        <main className="flex-1">
-          <div className="page py-8">
-            <Outlet context={{ openChat: () => setChatOpen(true) }} />
-          </div>
+      <div className="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 flex flex-col">
+        <NavBar onOpenChat={() => setChatOpen(true)} />
+        <main id="main-content" className="flex-1 pt-16">
+          <Outlet context={{ openChat: () => setChatOpen(true) }} />
         </main>
-
-        <footer className="border-t border-gray-200 dark:border-gray-800">
-          <div className="page py-6 text-sm text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} Jonathan Reyes — Built with React • Vite • Tailwind
-          </div>
-        </footer>
-
+        <Footer />
         <FloatingChatButton onClick={() => setChatOpen(true)} />
         <ChatModal open={chatOpen} onClose={() => setChatOpen(false)} />
       </div>
     </ChatProvider>
-
   );
 }

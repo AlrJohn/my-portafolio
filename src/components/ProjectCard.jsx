@@ -19,7 +19,11 @@ export default function ProjectCard({ p }) {
             Code
           </a>
         )}
-        {p.demo && <a className="underline" href={p.demo}>Demo</a>}
+        {p.demo && (
+          <a className="underline" href={p.demo} target={p.demo.startsWith('http') ? '_blank' : undefined} rel={p.demo.startsWith('http') ? 'noreferrer' : undefined}>
+            Demo
+          </a>
+        )}
       </div>
     </div>
   );

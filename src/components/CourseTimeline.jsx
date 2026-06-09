@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { sortCoursework } from "../data/coursework.js";
 
 export default function CourseTimeline() {
@@ -11,7 +11,7 @@ export default function CourseTimeline() {
 
       <ul className="space-y-6">
         {terms.map((term, i) => (
-          <motion.li
+          <Motion.li
             key={term.termId}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ export default function CourseTimeline() {
                 ))}
               </div>
             </div>
-          </motion.li>
+          </Motion.li>
         ))}
       </ul>
     </div>

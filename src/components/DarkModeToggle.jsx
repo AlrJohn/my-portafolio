@@ -1,29 +1,29 @@
-import { Sun, Moon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
+
+function initialTheme() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark' || saved === 'light') return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
 export default function DarkModeToggle() {
-  const [isDark, setIsDark] = useState(
-    () => document.documentElement.classList.contains('dark')
-  );
+  const [theme, setTheme] = useState(initialTheme);
+  const isDark = theme === 'dark';
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', theme);
+  }, [isDark, theme]);
 
   return (
     <button
       className="ml-2 px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
-      onClick={() => setIsDark(d => !d)}
-      aria-label="Toggle dark mode"
-      title="Toggle theme"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
     </button>
   );
 }

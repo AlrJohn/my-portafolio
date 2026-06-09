@@ -1,81 +1,87 @@
-# Jonathan Reyes - Portfolio
+# Jonathan Reyes Portfolio
 
-A modern, full-stack portfolio website featuring a Retrieval-Augmented Generation (RAG) chatbot powered by a local LLM
+Frontend for Jonathan Reyes' personal portfolio. The site is a React single-page application deployed to Vercel. Its Q&A modal calls a separately operated Raspberry Pi API backed by a local LLM.
 
-## 🚀 Tech Stack
+## Stack
 
-### Frontend
-- **React 19** with **Vite** - Fast, modern UI development.
-- **Tailwind CSS 4** - Responsive, cleaner styling.
-- **Framer Motion** - Smooth animations and transitions.
-- **React Router 7** - Client-side routing.
+- React 19 and React Router
+- Vite
+- Tailwind CSS
+- Framer Motion
+- EmailJS
+- Vitest and React Testing Library
 
-### Backend (Chatbot API)
-- **Flask** - Lightweight Python server.
-- **Ollama** - Interface for running local LLMs (Llama 3).
-- **FAISS** - Vector database for fast similarity search.
-- **Sentence-Transformers** - `all-MiniLM-L6-v2` for generating embeddings.
+This repository intentionally contains no chatbot backend, model, RAG data, or Raspberry Pi provisioning code.
 
-## ✨ Features
+## Local Development
 
-- **Personal AI Chatbot**: An "Ask Me" feature that answers questions about my background, projects, and skills using RAG.
-- **Dynamic Projects Showcase**: Interactive cards displaying my recent work.
-- **Responsive Design**: Built for mobile, tablet, and desktop.
-- **Dark Mode**: Fully supported system-aware dark theme.
-- **Experience & Coursework**: Detailed timelines of my professional and academic history.
+Requirements:
 
-## 🛠️ Setup & Installation
+- Node.js 22
+- npm 10 or newer
 
-### Prerequisites
-- Node.js (v18+)
-- Python (3.10+)
-- [Ollama](https://ollama.com/) (running locally)
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/AlrJohn/my-portafolio.git
-cd my-portafolio
-```
-
-### 2. Frontend Setup
-Install dependencies and run the dev server:
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-### 3. Backend Setup (Optional for Chatbot)
-If you want to run the RAG chatbot:
+On PowerShell, use:
 
-1. Navigate to the backend folder:
-   ```bash
-   cd flask-backend
-   ```
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   # Windows:
-   venv\Scripts\activate
-   # Mac/Linux:
-   source venv/bin/activate
-   ```
-3. Install Python dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Start the Flask server:
-   ```bash
-   python app.py
-   ```
-   *The server runs on `http://localhost:5000` by default.*
-
-### 4. Configure Ollama
-Ensure you have Ollama running and the model pulled:
-```bash
-ollama serve
-ollama pull llama3.1:8b
+```powershell
+Copy-Item .env.example .env.local
 ```
-*You can configure the model and host in `flask-backend/app.py` or via environment variables.*
 
-## 📄 License
-This project is open source and available under the [MIT License](LICENSE).
+The site remains usable without environment variables. Chat requests will show an unavailable state, and the contact page will provide a direct email link.
+
+## Environment Variables
+
+| Variable | Purpose |
+| --- | --- |
+| `VITE_CHAT_API_URL` | Public HTTPS base URL for the Raspberry Pi API, without a trailing slash |
+| `VITE_EMAILJS_SERVICE_ID` | EmailJS service identifier |
+| `VITE_EMAILJS_TEMPLATE_ID` | EmailJS template identifier |
+| `VITE_EMAILJS_PUBLIC_KEY` | EmailJS browser public key |
+
+Set the same values in the Vercel project's environment settings.
+
+## Chat API Contract
+
+The frontend sends:
+
+```http
+POST {VITE_CHAT_API_URL}/ask
+Content-Type: application/json
+
+{"question":"What projects has Jonathan built?"}
+```
+
+The API must return:
+
+```json
+{"response":"Answer text"}
+```
+
+The Pi service must allow the production Vercel origin through CORS. The frontend applies a 30-second timeout and displays safe errors without exposing backend details.
+
+## Content Updates
+
+- General identity, contact details, navigation, and About copy: `src/data/site.js`
+- Projects: `src/data/projects.js`
+- Experience: `src/data/experience.js`
+- Coursework: `src/data/coursework.js`
+- Profile image: `src/assets/profile.jpg`
+- SEO and canonical URL: `index.html`
+
+Review the dated-content checklist in `src/data/site.js` before publishing a content refresh.
+
+## Quality Checks
+
+```bash
+npm run lint
+npm run test:run
+npm run build
+npm run check
+```
+
+GitHub Actions runs the combined check on pushes and pull requests. `vercel.json` routes direct page requests back to the React application.
