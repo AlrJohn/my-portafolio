@@ -1,11 +1,22 @@
 export const site = {
   name: 'Jonathan Alavez Reyes',
   shortName: 'Jonathan Reyes',
-  title: 'Full-Stack Developer',
+  title: 'AI Engineer / Forward Deployed Engineer',
   email: 'joni17111@outlook.com',
-  description: 'Computer Science student building AI/ML applications and full-stack products.',
+  location: 'Norristown, PA',
+  description: 'Computer Science student building LLM products, agentic workflows, and full-stack systems.',
   repositoryUrl: 'https://github.com/AlrJohn/my-portafolio',
+  githubUrl: 'https://github.com/AlrJohn',
+  linkedinUrl: 'https://linkedin.com/in/jonathan-alavez',
+  resumeUrl: '/Jonathan_Alavez_Resume_2026.pdf',
 };
+
+export const socialLinks = [
+  { label: 'GitHub', href: site.githubUrl },
+  { label: 'LinkedIn', href: site.linkedinUrl },
+  { label: 'Resume', href: site.resumeUrl },
+  { label: 'Email', href: `mailto:${site.email}` },
+];
 
 export const navigation = [
   { label: 'Home', to: '/', end: true },
@@ -17,20 +28,35 @@ export const navigation = [
 ];
 
 export const about = {
-  intro: "I'm a Computer Science student at Penn State Abington and a Schreyer Honors Scholar focused on AI/ML, human-centered systems, and polished full-stack applications.",
-  focus: 'AI/ML and full-stack development',
-  internship: 'AI Engineering at JLG',
-  leadership: 'Student government and National Guard',
+  intro: "I'm a Computer Science student at Penn State Abington and a Schreyer Honors Scholar focused on AI engineering, forward deployed product work, and production-minded full-stack systems.",
+  focus: 'AI engineering and FDE work',
+  internship: 'Deloitte AI Innovation Fellow',
+  leadership: 'National Guard, SGA, and CS Society',
   highlights: [
     {
-      title: 'AI + Engineering',
-      body: 'I build LLM interfaces, semantic search systems, retrieval workflows, and production-minded user experiences.',
+      title: 'AI + Product Delivery',
+      body: 'I build LLM interfaces, agentic workflows, retrieval systems, and full-stack features that turn ambiguous workflows into usable tools.',
     },
     {
-      title: 'Research + Impact',
-      body: 'My work includes robotics, computer vision, human-centered research, and tools that improve real workflows.',
+      title: 'Research + Field Experience',
+      body: 'My background combines published AI research, robotics, enterprise AI internships, and leadership in high-accountability teams.',
     },
   ],
+};
+
+export const impactStats = [
+  { value: 'Deloitte', label: 'AI Innovation Fellow, CPG Innovation' },
+  { value: '200k+', label: 'Salesforce call transcripts summarized with LLM workflows' },
+  { value: '<1 hr', label: 'Reduced documentation work from 10+ hours to under 1 hour' },
+  { value: '50+', label: 'Support technicians trained on an AI support workflow' },
+  { value: '4.0', label: 'GPA, Schreyer Honors College Scholar' },
+  { value: '13', label: 'Soldiers led as a National Guard Sergeant' },
+];
+
+export const publication = {
+  title: 'AI and Student Self-Efficacy in Communication',
+  venue: 'IEEE Xplore',
+  href: 'https://ieeexplore.ieee.org/document/11413961',
 };
 
 // Review before the next content release:
