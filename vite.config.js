@@ -1,10 +1,9 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { fileURLToPath, URL } from 'node:url'
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   const buildEnv = {
     ...loadEnv(mode, process.cwd(), ''),
     ...process.env,
@@ -14,6 +13,26 @@ export default defineConfig(({ mode }) => {
     && buildEnv.SENTRY_AUTH_TOKEN
     && buildEnv.SENTRY_ORG
     && buildEnv.SENTRY_PROJECT
+
+  let sentryPlugin = null
+  if (sentryBuildEnabled) {
+    try {
+      const mod = await import('@sentry/vite-plugin')
+      sentryPlugin = mod.sentryVitePlugin({
+        authToken: buildEnv.SENTRY_AUTH_TOKEN,
+        org: buildEnv.SENTRY_ORG,
+        project: buildEnv.SENTRY_PROJECT,
+        release: {
+          name: release,
+        },
+        sourcemaps: {
+          filesToDeleteAfterUpload: ['./dist/**/*.map'],
+        },
+      })
+    } catch {
+      sentryPlugin = null
+    }
+  }
 
   return {
     resolve: {
@@ -37,17 +56,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      sentryBuildEnabled && sentryVitePlugin({
-        authToken: buildEnv.SENTRY_AUTH_TOKEN,
-        org: buildEnv.SENTRY_ORG,
-        project: buildEnv.SENTRY_PROJECT,
-        release: {
-          name: release,
-        },
-        sourcemaps: {
-          filesToDeleteAfterUpload: ['./dist/**/*.map'],
-        },
-      }),
+      sentryPlugin,
     ].filter(Boolean),
     test: {
       environment: 'jsdom',
