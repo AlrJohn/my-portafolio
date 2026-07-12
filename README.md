@@ -63,6 +63,7 @@ The API must return:
 ```
 
 The Pi service must allow the production Vercel origin through CORS. The frontend applies a 30-second timeout and displays safe errors without exposing backend details.
+Every request includes an `X-Request-ID` header. The API should return the same header and include it in structured logs.
 
 ## Content Updates
 

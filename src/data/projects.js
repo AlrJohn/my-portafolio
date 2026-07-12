@@ -98,7 +98,7 @@ export const projects = [
       'On-site AI assistant',
       'Vector search',
       'Raspberry Pi service',
-      'Frontend observability',
+      'App reliability',
     ],
     caseStudy: {
       problem:

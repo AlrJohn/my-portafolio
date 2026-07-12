@@ -1,11 +1,16 @@
 import { env } from '../config/env.js';
 
 export class ChatApiError extends Error {
-  constructor(message, code = 'unavailable') {
+  constructor(message, code = 'unavailable', diagnostics = {}) {
     super(message);
     this.name = 'ChatApiError';
     this.code = code;
+    this.diagnostics = diagnostics;
   }
+}
+
+export function createRequestId() {
+  return crypto.randomUUID();
 }
 
 export async function askChat(question, { signal, timeoutMs = 30_000 } = {}) {
@@ -13,6 +18,8 @@ export async function askChat(question, { signal, timeoutMs = 30_000 } = {}) {
     throw new ChatApiError('Chat is not configured.', 'not_configured');
   }
 
+  const requestId = createRequestId();
+  const startedAt = performance.now();
   const timeoutController = new AbortController();
   const timeoutId = setTimeout(() => timeoutController.abort(), timeoutMs);
   const combinedSignal = signal
@@ -22,23 +29,48 @@ export async function askChat(question, { signal, timeoutMs = 30_000 } = {}) {
   try {
     const response = await fetch(`${env.chatApiUrl}/ask`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Request-ID': requestId,
+      },
       body: JSON.stringify({ question }),
       signal: combinedSignal,
     });
     const data = await response.json().catch(() => null);
+    const durationMs = Math.round(performance.now() - startedAt);
+    const responseRequestId = response.headers?.get?.('X-Request-ID') || requestId;
 
-    if (!response.ok || typeof data?.response !== 'string' || !data.response.trim()) {
-      throw new ChatApiError('The assistant returned an invalid response.');
+    if (!response.ok) {
+      throw new ChatApiError('The assistant is currently unavailable.', 'http_error', {
+        request_id: responseRequestId,
+        status: response.status,
+        duration_ms: durationMs,
+      });
     }
 
-    return data.response.trim();
+    if (typeof data?.response !== 'string' || !data.response.trim()) {
+      throw new ChatApiError('The assistant returned an invalid response.', 'invalid_response', {
+        request_id: responseRequestId,
+        status: response.status,
+        duration_ms: durationMs,
+      });
+    }
+
+    return {
+      response: data.response.trim(),
+      requestId: responseRequestId,
+      durationMs,
+    };
   } catch (error) {
     if (error instanceof ChatApiError) throw error;
+    const diagnostics = {
+      request_id: requestId,
+      duration_ms: Math.round(performance.now() - startedAt),
+    };
     if (error?.name === 'AbortError') {
-      throw new ChatApiError('The assistant took too long to respond.', 'timeout');
+      throw new ChatApiError('The assistant took too long to respond.', 'timeout', diagnostics);
     }
-    throw new ChatApiError('The assistant is currently unavailable.');
+    throw new ChatApiError('The assistant is currently unavailable.', 'network', diagnostics);
   } finally {
     clearTimeout(timeoutId);
   }

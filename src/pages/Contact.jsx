@@ -4,7 +4,6 @@ import { motion as Motion } from 'framer-motion';
 import { ExternalLink, FileText, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { env, hasEmailConfig } from '../config/env.js';
 import { site } from '../data/site.js';
-import { addBreadcrumb, reportError } from '../observability/telemetry.js';
 
 const appear = (delay = 0) => ({
   initial: { opacity: 0, y: 12 },
@@ -45,8 +44,6 @@ export default function Contact() {
     if (!hasEmailConfig || !validate()) return;
 
     setSending(true);
-    const startedAt = performance.now();
-    addBreadcrumb('contact', 'Contact submission started');
     try {
       await emailjs.send(
         env.emailjs.serviceId,
@@ -60,20 +57,10 @@ export default function Contact() {
       );
       setStatus({ type: 'success', message: "Message sent. I'll get back to you soon." });
       setForm({ name: '', email: '', message: '' });
-      addBreadcrumb('contact', 'Contact submission succeeded', {
-        duration_ms: Math.round(performance.now() - startedAt),
-      });
-    } catch (error) {
-      const incidentId = reportError(new Error('Email provider request failed'), 'contact_submit', {
-        error_code: 'provider_error',
-        provider: 'emailjs',
-        provider_status: error?.status || 'unknown',
-        duration_ms: Math.round(performance.now() - startedAt),
-        route: window.location.pathname,
-      });
+    } catch {
       setStatus({
         type: 'error',
-        message: `The form is unavailable. Please email me directly.${incidentId ? ` Reference: ${incidentId}` : ''}`,
+        message: 'The form is unavailable. Please email me directly.',
       });
     } finally {
       setSending(false);

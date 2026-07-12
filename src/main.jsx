@@ -1,10 +1,6 @@
-import './instrument.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import * as Sentry from '@sentry/react';
-import { reactErrorHandlers } from './instrument.jsx';
-import { monitoringEnabled } from './config/env.js';
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
@@ -14,7 +10,6 @@ import Experience from './pages/Experience.jsx';
 import Contact from './pages/Contact.jsx';
 import Coursework from './pages/Coursework.jsx';
 import NotFound from './pages/NotFound.jsx';
-import RouteError from './pages/RouteError.jsx';
 
 import './index.css';
 
@@ -22,14 +17,10 @@ const savedTheme = localStorage.getItem('theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 document.documentElement.classList.toggle('dark', savedTheme === 'dark' || (!savedTheme && prefersDark));
 
-const createInstrumentedRouter = monitoringEnabled
-  ? Sentry.wrapCreateBrowserRouterV7(createBrowserRouter)
-  : createBrowserRouter;
-const router = createInstrumentedRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <RouteError />,
     children: [
       { index: true, element: <Home /> },
       { path: 'about', element: <About /> },
@@ -43,7 +34,7 @@ const router = createInstrumentedRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root'), reactErrorHandlers).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

@@ -19,7 +19,7 @@ function Avatar({ isBot }) {
 export default function Chatbot() {
   const { messages, setMessages, loading, setLoading, clearChat } = useChat();
   const [input, setInput] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -37,14 +37,17 @@ export default function Chatbot() {
 
     setMessages((current) => [...current, { role: 'user', text }]);
     setInput('');
-    setError('');
+    setError(null);
     setLoading(true);
 
     try {
-      const response = await askChat(text);
+      const { response } = await askChat(text);
       setMessages((current) => [...current, { role: 'bot', text: response }]);
     } catch (requestError) {
-      setError(requestError.message);
+      setError({
+        message: requestError.message,
+        reference: requestError.diagnostics?.request_id,
+      });
     } finally {
       setLoading(false);
     }
@@ -99,7 +102,10 @@ export default function Chatbot() {
       <div className="p-4 pt-2">
         {error && (
           <div className="mb-3 rounded-xl border border-amber-400/30 bg-amber-400/10 p-3 text-sm text-amber-100" role="alert">
-            {error} Please try again shortly.
+            {error.message} Please try again shortly.
+            {error.reference && (
+              <span className="block mt-1 text-xs">Reference: {error.reference}</span>
+            )}
           </div>
         )}
         <div className="relative flex items-center gap-2">
