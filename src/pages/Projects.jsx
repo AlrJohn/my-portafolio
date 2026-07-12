@@ -4,9 +4,12 @@ import ProjectCard from '../components/ProjectCard.jsx';
 
 export default function Projects() {
   return (
-    <div className="page py-8">
-      <Section title="Projects" subtitle="Selected work in AI/ML and full-stack development">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="page py-12 md:py-16">
+      <Section
+        title="Projects"
+        subtitle="Public, inspectable work across AI products, RAG systems, and full-stack delivery."
+      >
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => <ProjectCard key={project.title} p={project} />)}
         </div>
       </Section>

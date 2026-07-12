@@ -16,5 +16,6 @@ describe('NavBar', () => {
     await user.click(screen.getByRole('button', { name: 'Open menu' }));
     expect(screen.getByRole('navigation', { name: 'Mobile navigation' })).toBeInTheDocument();
     expect(screen.getAllByRole('link', { name: 'Coursework' })).toHaveLength(2);
+    expect(screen.getAllByRole('link', { name: /resume/i })).toHaveLength(2);
   });
 });

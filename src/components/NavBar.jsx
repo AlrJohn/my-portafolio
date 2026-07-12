@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { FileText, Menu, X } from 'lucide-react';
 import DarkModeToggle from './DarkModeToggle.jsx';
 import { navigation, site } from '../data/site.js';
 
@@ -39,6 +39,12 @@ export default function NavBar({ onOpenChat }) {
           >
             Ask Me
           </button>
+          <a
+            href={site.resumeUrl}
+            className="inline-flex items-center gap-1 px-3 py-2 rounded-xl border border-gray-300 hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
+          >
+            <FileText size={16} aria-hidden="true" /> Resume
+          </a>
           <DarkModeToggle />
         </nav>
 
@@ -74,6 +80,13 @@ export default function NavBar({ onOpenChat }) {
             >
               Ask Me
             </button>
+            <a
+              href={site.resumeUrl}
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-700"
+              onClick={closeMenu}
+            >
+              <FileText size={16} aria-hidden="true" /> Resume
+            </a>
             <div className="py-2">
               <DarkModeToggle />
             </div>

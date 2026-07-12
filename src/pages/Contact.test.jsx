@@ -12,5 +12,13 @@ describe('Contact', () => {
       'href',
       expect.stringContaining('mailto:joni17111@outlook.com'),
     );
+    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute(
+      'href',
+      'https://linkedin.com/in/jonathan-alavez',
+    );
+    expect(screen.getByRole('link', { name: 'Resume' })).toHaveAttribute(
+      'href',
+      '/Jonathan_Alavez_Resume_2026.pdf',
+    );
   });
 });
