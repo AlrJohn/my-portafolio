@@ -51,6 +51,25 @@ export const professionalExperience = [
 
 export const researchExperience = [
   {
+    id: 'multimodal-medical-ai-2026',
+    role: 'Undergraduate Researcher',
+    org: 'Howard University Healthcare & AI Research Team',
+    location: 'Remote / Research Collaboration',
+    start: '2026-01',
+    end: null,
+    current: true,
+    bullets: [
+      'Research a multimodal medical AI system for head CT interpretation, adapting LLaVA-style vision-language architectures to combine CT imaging, radiology reports, and large language models for clinical question answering and reasoning.',
+      'Designed a two-stage fine-tuning methodology using a CT-capable vision encoder, trainable visual projection layer, and pretrained LLM, with parameter-efficient LoRA and QLoRA adaptation that preserves pretrained visual and language representations.',
+      'Develop a dataset pipeline that transforms radiology reports and clinical information into structured question-answer pairs categorized as CT-answerable, report-dependent, multimodal, or unsupported to improve grounding and reduce hallucinations.',
+      'Designed controlled CT-plus-report, CT-only, and report-only experiments to measure whether responses are grounded in medical imaging rather than relying primarily on textual reports.',
+      'Investigate MIMIC-IV and related medical datasets for privacy-compliant model development and evaluation involving clinical reasoning, diagnostic findings, and multimodal alignment.',
+      'Defined evaluation criteria for clinical finding identification, anatomical localization, severity assessment, unsupported findings, cross-modality consistency, and appropriate abstention when evidence is insufficient.',
+      'Conducted an extensive literature review of multimodal foundation models and visual instruction-tuning methods, including LLaVA, to adapt reproducible techniques for volumetric medical imaging and clinical decision-support research.',
+    ],
+    tags: ['Multimodal AI', 'Medical AI', 'Computer Vision', 'LLMs', 'LLaVA', 'LoRA/QLoRA', 'MIMIC-IV'],
+  },
+  {
     id: 'editory-ai-2024',
     role: 'Researcher',
     org: 'Editory.AI',

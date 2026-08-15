@@ -9,6 +9,7 @@ describe('Experience', () => {
     expect(screen.getByRole('heading', { name: 'Professional Experience' })).toBeInTheDocument();
     expect(screen.getByText(/AI Innovation Fellow/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Research & Publications' })).toBeInTheDocument();
+    expect(screen.getByText(/Howard University Faculty Research Team/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /IEEE Xplore/i })).toHaveAttribute(
       'href',
       'https://ieeexplore.ieee.org/document/11413961',
