@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import ChatModal from './components/ChatModal.jsx';
 import FloatingChatButton from './components/FloatingChatButton.jsx';
 import Footer from './components/Footer.jsx';
@@ -22,6 +23,7 @@ export default function App() {
         <FloatingChatButton onClick={() => setChatOpen(true)} />
         <ChatModal open={chatOpen} onClose={() => setChatOpen(false)} />
       </div>
+      <Analytics />
     </ChatProvider>
   );
 }
